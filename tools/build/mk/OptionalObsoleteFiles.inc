@@ -4146,6 +4146,8 @@ OLD_FILES+=usr/bin/ld.lld
 
 .if ${MK_LLDB} == no
 OLD_FILES+=usr/bin/lldb
+OLD_FILES+=usr/bin/lldb-server
+OLD_FILES+=usr/share/man/man1/lldb-server.1.gz
 OLD_FILES+=usr/share/man/man1/lldb.1.gz
 .endif
 
