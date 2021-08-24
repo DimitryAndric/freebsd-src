@@ -20,6 +20,8 @@ MLINKS=		ld.lld.1 ld.1
 NO_SHARED?= yes
 .endif
 
+.include "${SRCTOP}/lib/clang/llvm.pre.mk"
+
 CFLAGS+=	-I${LLD_SRCS}/ELF
 CFLAGS+=	-I${LLD_SRCS}/include
 CFLAGS+=	-I${.OBJDIR}
