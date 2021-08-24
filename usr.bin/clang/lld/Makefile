@@ -90,7 +90,6 @@ DPADD+=		${OBJTOP}/lib/clang/lib${lib}/lib${lib}.a
 LDADD+=		${OBJTOP}/lib/clang/lib${lib}/lib${lib}.a
 .endfor
 
-LLVM_TBLGEN?=	llvm-tblgen
 INCFILE=	Options.inc
 TDFILE=		${LLD_SRCS}/ELF/Options.td
 GENOPT=		-gen-opt-parser-defs
@@ -99,6 +98,7 @@ ${INCFILE}: ${TDFILE}
 	    -o ${.TARGET} ${TDFILE}
 TGHDRS+=	${INCFILE}
 
+DEPENDFILES+=	${TGHDRS:C/$/.d/}
 DPSRCS+=	${TGHDRS}
 CLEANFILES+=	${TGHDRS} ${TGHDRS:C/$/.d/}
 
