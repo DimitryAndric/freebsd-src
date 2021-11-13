@@ -331,7 +331,7 @@ OLD_DIRS+=usr/lib/clang/12.0.1/lib/freebsd
 OLD_DIRS+=usr/lib/clang/12.0.1/lib
 OLD_DIRS+=usr/lib/clang/12.0.1
 
-# 2021mmdd: new libc++ import which bumps version from 12.0.1 to 13.0.0.
+# 20211113: new libc++ import which bumps version from 12.0.1 to 13.0.0.
 OLD_FILES+=usr/include/c++/v1/__functional_03
 OLD_FILES+=usr/include/c++/v1/__functional_base_03
 OLD_FILES+=usr/include/c++/v1/__memory/base.h
