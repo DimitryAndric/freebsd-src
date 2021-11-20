@@ -369,10 +369,10 @@
 #define PACKAGE_NAME "LLVM"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "LLVM 13.0.0"
+#define PACKAGE_STRING "LLVM 14.0.0"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "13.0.0"
+#define PACKAGE_VERSION "14.0.0"
 
 /* Define to the vendor of this package. */
 /* #undef PACKAGE_VENDOR */
