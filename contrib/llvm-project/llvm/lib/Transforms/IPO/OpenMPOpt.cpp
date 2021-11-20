@@ -3550,8 +3550,6 @@ struct AAKernelInfoFunction : AAKernelInfo {
     BranchInst::Create(StateMachineBeginBB, UserCodeEntryBB, IsWorker,
                        IsWorkerCheckBB);
 
-    Module &M = *Kernel->getParent();
-
     // Create local storage for the work function pointer.
     const DataLayout &DL = M.getDataLayout();
     Type *VoidPtrTy = Type::getInt8PtrTy(Ctx);
