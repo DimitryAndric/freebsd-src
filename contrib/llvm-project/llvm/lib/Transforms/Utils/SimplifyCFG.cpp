@@ -3277,17 +3277,6 @@ bool llvm::FoldBranchToCommonDest(BranchInst *BI, DomTreeUpdater *DTU,
     // Does this instruction require rewriting of uses?
     if (!all_of(I.uses(), IsBCSSAUse))
       return false;
-
-    auto IsBCSSAUse = [BB, &I](Use &U) {
-      auto *UI = cast<Instruction>(U.getUser());
-      if (auto *PN = dyn_cast<PHINode>(UI))
-        return PN->getIncomingBlock(U) == BB;
-      return UI->getParent() == BB && I.comesBefore(UI);
-    };
-
-    // Does this instruction require rewriting of uses?
-    if (!all_of(I.uses(), IsBCSSAUse))
-      return false;
   }
   if (NumBonusInsts >
       BonusInstThreshold *
