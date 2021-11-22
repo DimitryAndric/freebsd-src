@@ -369,6 +369,7 @@ SRCS_EXT+=	Format/Format.cpp
 SRCS_EXT+=	Format/FormatToken.cpp
 SRCS_EXT+=	Format/FormatTokenLexer.cpp
 SRCS_EXT+=	Format/NamespaceEndCommentsFixer.cpp
+SRCS_EXT+=	Format/QualifierAlignmentFixer.cpp
 SRCS_EXT+=	Format/SortJavaScriptImports.cpp
 SRCS_EXT+=	Format/TokenAnalyzer.cpp
 SRCS_EXT+=	Format/TokenAnnotator.cpp
