@@ -349,6 +349,10 @@ OLD_DIRS+=usr/lib/clang/13.0.0/lib/freebsd
 OLD_DIRS+=usr/lib/clang/13.0.0/lib
 OLD_DIRS+=usr/lib/clang/13.0.0
 
+# 20220514: new libc++ import which bumps version from 13.0.0 to 14.0.0
+OLD_FILES+=usr/include/c++/v1/__memory/pointer_safety.h
+OLD_FILES+=usr/include/c++/v1/__utility/__decay_copy.h
+
 # 20220418: uudecode merged into uuencode and renamed to bintrans
 OLD_FILES+=usr/lib/debug/usr/bin/uuencode.debug
 OLD_FILES+=usr/lib/debug/usr/bin/uudecode.debug
