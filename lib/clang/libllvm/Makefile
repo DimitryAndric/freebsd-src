@@ -915,6 +915,7 @@ SRCS_MIN+=	ProfileData/InstrProf.cpp
 SRCS_MIN+=	ProfileData/InstrProfReader.cpp
 SRCS_MIN+=	ProfileData/InstrProfWriter.cpp
 SRCS_MIN+=	ProfileData/ProfileSummaryBuilder.cpp
+SRCS_EXT+=	ProfileData/RawMemProfReader.cpp
 SRCS_MIN+=	ProfileData/SampleProf.cpp
 SRCS_MIN+=	ProfileData/SampleProfReader.cpp
 SRCS_MIN+=	ProfileData/SampleProfWriter.cpp
