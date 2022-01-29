@@ -369,6 +369,7 @@ SRCS_MIN+=	Edit/RewriteObjCFoundationAPI.cpp
 SRCS_EXT+=	Format/AffectedRangeManager.cpp
 SRCS_EXT+=	Format/BreakableToken.cpp
 SRCS_EXT+=	Format/ContinuationIndenter.cpp
+SRCS_EXT+=	Format/DefinitionBlockSeparator.cpp
 SRCS_EXT+=	Format/Format.cpp
 SRCS_EXT+=	Format/FormatToken.cpp
 SRCS_EXT+=	Format/FormatTokenLexer.cpp
