@@ -1259,6 +1259,7 @@ OLD_FILES+=usr/lib/clang/14.0.0/include/arm_cmse.h
 OLD_FILES+=usr/lib/clang/14.0.0/include/arm_fp16.h
 OLD_FILES+=usr/lib/clang/14.0.0/include/arm_mve.h
 OLD_FILES+=usr/lib/clang/14.0.0/include/arm_neon.h
+OLD_FILES+=usr/lib/clang/14.0.0/include/arm_neon_sve_bridge.h
 OLD_FILES+=usr/lib/clang/14.0.0/include/arm_sve.h
 OLD_FILES+=usr/lib/clang/14.0.0/include/armintr.h
 OLD_FILES+=usr/lib/clang/14.0.0/include/avx2intrin.h
