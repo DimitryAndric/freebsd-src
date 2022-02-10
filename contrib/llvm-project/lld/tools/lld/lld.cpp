@@ -143,11 +143,11 @@ bool inTestOutputDisabled = false;
 static int lldMain(int argc, const char **argv, llvm::raw_ostream &stdoutOS,
                    llvm::raw_ostream &stderrOS, bool exitEarly = true) {
   std::vector<const char *> args(argv, argv + argc);
-#if 1
-  // On FreeBSD we only build the ELF linker.
-  auto link = elf::link;
-#else
   auto link = [&args]() {
+#if 1
+    // On FreeBSD we only build the ELF linker.
+    return elf::link;
+#else
     Flavor f = parseFlavor(args);
     if (f == Gnu && isPETarget(args))
       return mingw::link;
