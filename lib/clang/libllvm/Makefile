@@ -1399,6 +1399,7 @@ SRCS_MIN+=	Target/RISCV/RISCVISelDAGToDAG.cpp
 SRCS_MIN+=	Target/RISCV/RISCVISelLowering.cpp
 SRCS_MIN+=	Target/RISCV/RISCVLegalizerInfo.cpp
 SRCS_MIN+=	Target/RISCV/RISCVMCInstLower.cpp
+SRCS_MIN+=	Target/RISCV/RISCVMachineFunctionInfo.cpp
 SRCS_MIN+=	Target/RISCV/RISCVMergeBaseOffset.cpp
 SRCS_MIN+=	Target/RISCV/RISCVRegisterBankInfo.cpp
 SRCS_MIN+=	Target/RISCV/RISCVRegisterInfo.cpp
