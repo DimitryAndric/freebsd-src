@@ -1417,6 +1417,7 @@ SRCS_MIN+=	Target/TargetMachineC.cpp
 .if ${MK_LLVM_TARGET_X86} != "no"
 SRCS_MIN+=	Target/X86/AsmParser/X86AsmParser.cpp
 SRCS_XDW+=	Target/X86/Disassembler/X86Disassembler.cpp
+SRCS_EXT+=	Target/X86/MCA/X86CustomBehaviour.cpp
 SRCS_MIN+=	Target/X86/MCTargetDesc/X86ATTInstPrinter.cpp
 SRCS_MIN+=	Target/X86/MCTargetDesc/X86AsmBackend.cpp
 SRCS_MIN+=	Target/X86/MCTargetDesc/X86ELFObjectWriter.cpp
