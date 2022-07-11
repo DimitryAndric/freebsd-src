@@ -23,6 +23,8 @@ CFLAGS+=	-I${LLVM_SRCS}/lib/Target/${arch}
 . endif
 .endfor
 
+CFLAGS+=        -I${LLVM_SRCS}/lib/ObjCopy
+
 SRCDIR=		llvm/lib
 
 # Explanation of different SRCS variants below:
@@ -517,6 +519,7 @@ SRCS_MIN+=	DebugInfo/DWARF/DWARFExpression.cpp
 SRCS_MIW+=	DebugInfo/DWARF/DWARFFormValue.cpp
 SRCS_MIW+=	DebugInfo/DWARF/DWARFGdbIndex.cpp
 SRCS_MIW+=	DebugInfo/DWARF/DWARFListTable.cpp
+SRCS_MIW+=	DebugInfo/DWARF/DWARFTypePrinter.cpp
 SRCS_MIW+=	DebugInfo/DWARF/DWARFTypeUnit.cpp
 SRCS_MIW+=	DebugInfo/DWARF/DWARFUnit.cpp
 SRCS_MIW+=	DebugInfo/DWARF/DWARFUnitIndex.cpp
@@ -617,6 +620,8 @@ SRCS_EXT+=	DebugInfo/PDB/PDBSymbolUsingNamespace.cpp
 SRCS_EXT+=	DebugInfo/PDB/UDTLayout.cpp
 SRCS_MIW+=	DebugInfo/Symbolize/DIFetcher.cpp
 SRCS_MIW+=	DebugInfo/Symbolize/DIPrinter.cpp
+SRCS_MIW+=	DebugInfo/Symbolize/Markup.cpp
+SRCS_MIW+=	DebugInfo/Symbolize/MarkupFilter.cpp
 SRCS_MIW+=	DebugInfo/Symbolize/SymbolizableObjectFile.cpp
 SRCS_MIW+=	DebugInfo/Symbolize/Symbolize.cpp
 SRCS_MIW+=	Debuginfod/DIFetcher.cpp
@@ -883,6 +888,28 @@ SRCS_EXT+=	MCA/Stages/RetireStage.cpp
 SRCS_EXT+=	MCA/Stages/Stage.cpp
 SRCS_EXT+=	MCA/Support.cpp
 SRCS_EXT+=	MCA/View.cpp
+SRCS_MIW+=	ObjCopy/Archive.cpp
+SRCS_MIW+=	ObjCopy/COFF/COFFObjcopy.cpp
+SRCS_MIW+=	ObjCopy/COFF/COFFObject.cpp
+SRCS_MIW+=	ObjCopy/COFF/COFFReader.cpp
+SRCS_MIW+=	ObjCopy/COFF/COFFWriter.cpp
+SRCS_MIW+=	ObjCopy/CommonConfig.cpp
+SRCS_MIW+=	ObjCopy/ConfigManager.cpp
+SRCS_MIW+=	ObjCopy/ELF/ELFObjcopy.cpp
+SRCS_MIW+=	ObjCopy/ELF/ELFObject.cpp
+SRCS_MIW+=	ObjCopy/MachO/MachOLayoutBuilder.cpp
+SRCS_MIW+=	ObjCopy/MachO/MachOObjcopy.cpp
+SRCS_MIW+=	ObjCopy/MachO/MachOObject.cpp
+SRCS_MIW+=	ObjCopy/MachO/MachOReader.cpp
+SRCS_MIW+=	ObjCopy/MachO/MachOWriter.cpp
+SRCS_MIW+=	ObjCopy/ObjCopy.cpp
+SRCS_MIW+=	ObjCopy/XCOFF/XCOFFObjcopy.cpp
+SRCS_MIW+=	ObjCopy/XCOFF/XCOFFReader.cpp
+SRCS_MIW+=	ObjCopy/XCOFF/XCOFFWriter.cpp
+SRCS_MIW+=	ObjCopy/wasm/WasmObjcopy.cpp
+SRCS_MIW+=	ObjCopy/wasm/WasmObject.cpp
+SRCS_MIW+=	ObjCopy/wasm/WasmReader.cpp
+SRCS_MIW+=	ObjCopy/wasm/WasmWriter.cpp
 SRCS_MIN+=	Object/Archive.cpp
 SRCS_MIN+=	Object/ArchiveWriter.cpp
 SRCS_MIN+=	Object/Binary.cpp
@@ -903,6 +930,7 @@ SRCS_MIW+=	Object/Minidump.cpp
 SRCS_MIN+=	Object/ModuleSymbolTable.cpp
 SRCS_EXT+=	Object/Object.cpp
 SRCS_MIN+=	Object/ObjectFile.cpp
+SRCS_MIW+=	Object/OffloadBinary.cpp
 SRCS_MIN+=	Object/RecordStreamer.cpp
 SRCS_MIW+=	Object/RelocationResolver.cpp
 SRCS_MIW+=	Object/SymbolSize.cpp
