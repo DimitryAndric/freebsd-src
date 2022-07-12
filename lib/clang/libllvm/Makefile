@@ -23,7 +23,7 @@ CFLAGS+=	-I${LLVM_SRCS}/lib/Target/${arch}
 . endif
 .endfor
 
-CFLAGS+=        -I${LLVM_SRCS}/lib/ObjCopy
+CFLAGS+=	-I${LLVM_SRCS}/lib/ObjCopy
 
 SRCDIR=		llvm/lib
 
@@ -486,6 +486,7 @@ SRCS_MIN+=	DebugInfo/CodeView/RecordSerialization.cpp
 SRCS_MIN+=	DebugInfo/CodeView/SimpleTypeSerializer.cpp
 SRCS_EXT+=	DebugInfo/CodeView/StringsAndChecksums.cpp
 SRCS_MIN+=	DebugInfo/CodeView/SymbolDumper.cpp
+SRCS_EXT+=	DebugInfo/CodeView/SymbolRecordHelpers.cpp
 SRCS_MIN+=	DebugInfo/CodeView/SymbolRecordMapping.cpp
 SRCS_EXT+=	DebugInfo/CodeView/SymbolSerializer.cpp
 SRCS_MIN+=	DebugInfo/CodeView/TypeDumpVisitor.cpp
@@ -536,6 +537,7 @@ SRCS_EXT+=	DebugInfo/PDB/Native/DbiModuleList.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/DbiStream.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/DbiStreamBuilder.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/EnumTables.cpp
+SRCS_EXT+=	DebugInfo/PDB/Native/FormatUtil.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/GSIStreamBuilder.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/GlobalsStream.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/Hash.cpp
@@ -543,6 +545,8 @@ SRCS_EXT+=	DebugInfo/PDB/Native/HashTable.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/InfoStream.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/InfoStreamBuilder.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/InjectedSourceStream.cpp
+SRCS_EXT+=	DebugInfo/PDB/Native/InputFile.cpp
+SRCS_EXT+=	DebugInfo/PDB/Native/LinePrinter.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/ModuleDebugStream.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/NamedStreamMap.cpp
 SRCS_EXT+=	DebugInfo/PDB/Native/NativeCompilandSymbol.cpp
@@ -639,6 +643,7 @@ SRCS_XDB+=	ExecutionEngine/GDBRegistrationListener.cpp
 SRCS_XDB+=	ExecutionEngine/Interpreter/Execution.cpp
 SRCS_XDB+=	ExecutionEngine/Interpreter/ExternalFunctions.cpp
 SRCS_XDB+=	ExecutionEngine/Interpreter/Interpreter.cpp
+SRCS_EXT+=	ExecutionEngine/JITLink/DWARFRecordSectionSplitter.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/EHFrameSupport.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELF.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELF_aarch64.cpp
@@ -677,6 +682,7 @@ SRCS_EXT+=	ExecutionEngine/Orc/JITTargetMachineBuilder.cpp
 SRCS_EXT+=	ExecutionEngine/Orc/LLJIT.cpp
 SRCS_EXT+=	ExecutionEngine/Orc/Layer.cpp
 SRCS_EXT+=	ExecutionEngine/Orc/LazyReexports.cpp
+SRCS_EXT+=	ExecutionEngine/Orc/LookupAndRecordAddrs.cpp
 SRCS_EXT+=	ExecutionEngine/Orc/MachOPlatform.cpp
 SRCS_EXT+=	ExecutionEngine/Orc/Mangling.cpp
 SRCS_EXT+=	ExecutionEngine/Orc/ObjectFileInterface.cpp
