@@ -363,6 +363,13 @@ OLD_FILES+=usr/lib/clang/14.0.5/share/msan_ignorelist.txt
 OLD_DIRS+=usr/lib/clang/14.0.5/share
 OLD_DIRS+=usr/lib/clang/14.0.5
 
+# 20230208: new libc++ import which bumps version from 14.0.5 to 15.0.0
+OLD_FILES+=usr/include/c++/v1/__functional_base
+OLD_FILES+=usr/include/c++/v1/__libcpp_version
+OLD_FILES+=usr/include/c++/v1/__nullptr
+OLD_FILES+=usr/include/c++/v1/__string
+OLD_FILES+=usr/include/c++/v1/experimental/filesystem
+
 # 20230203: loader help files renamed
 OLD_FILES+=boot/loader.help
 
