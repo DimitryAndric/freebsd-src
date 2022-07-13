@@ -363,6 +363,13 @@ OLD_FILES+=usr/lib/clang/14.0.5/share/msan_ignorelist.txt
 OLD_DIRS+=usr/lib/clang/14.0.5/share
 OLD_DIRS+=usr/lib/clang/14.0.5
 
+# 2022mmdd: new libc++ import which bumps version from 14.0.5 to 15.0.0
+OLD_FILES+=usr/include/c++/v1/__functional_base
+OLD_FILES+=usr/include/c++/v1/__libcpp_version
+OLD_FILES+=usr/include/c++/v1/__nullptr
+OLD_FILES+=usr/include/c++/v1/__string
+OLD_FILES+=usr/include/c++/v1/experimental/filesystem
+
 # 20220813: minigzip(1) removed in favor of gzip(1)
 OLD_FILES+=usr/bin/minigzip
 OLD_FILES+=usr/share/man/man1/minigzip.1.gz
