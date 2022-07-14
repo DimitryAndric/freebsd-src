@@ -434,16 +434,6 @@ bool MachineSinking::runOnMachineFunction(MachineFunction &MF) {
   AA = &getAnalysis<AAResultsWrapperPass>().getAAResults();
   RegClassInfo.runOnMachineFunction(MF);
 
-  // MachineSink currently uses MachineLoopInfo, which only recognizes natural
-  // loops. As such, we could sink instructions into irreducible cycles, which
-  // would be non-profitable.
-  // WARNING: The current implementation of hasStoreBetween() is incorrect for
-  // sinking into irreducible cycles (PR53990), this bailout is currently
-  // necessary for correctness, not just profitability.
-  ReversePostOrderTraversal<MachineBasicBlock *> RPOT(&*MF.begin());
-  if (containsIrreducibleCFG<MachineBasicBlock *>(RPOT, *LI))
-    return false;
-
   bool EverMadeChange = false;
 
   while (true) {

@@ -392,8 +392,7 @@ PPCTargetLowering::PPCTargetLowering(const PPCTargetMachine &TM,
 
   // MASS transformation for LLVM intrinsics with replicating fast-math flag
   // to be consistent to PPCGenScalarMASSEntries pass
-  if (TM.getOptLevel() == CodeGenOpt::Aggressive &&
-      TM.Options.PPCGenScalarMASSEntries) {
+  if (TM.getOptLevel() == CodeGenOpt::Aggressive) {
     setOperationAction(ISD::FSIN , MVT::f64, Custom);
     setOperationAction(ISD::FCOS , MVT::f64, Custom);
     setOperationAction(ISD::FPOW , MVT::f64, Custom);
@@ -1347,7 +1346,6 @@ PPCTargetLowering::PPCTargetLowering(const PPCTargetMachine &TM,
     setLibcallName(RTLIB::SRA_I128, nullptr);
     setLibcallName(RTLIB::MUL_I128, nullptr);
     setLibcallName(RTLIB::MULO_I64, nullptr);
-    setLibcallName(RTLIB::MULO_I128, nullptr);
   }
 
   if (!isPPC64)
@@ -17889,13 +17887,17 @@ bool PPCTargetLowering::isLowringToMASSSafe(SDValue Op) const {
   return Op.getNode()->getFlags().hasApproximateFuncs();
 }
 
+bool PPCTargetLowering::isScalarMASSConversionEnabled() const {
+  return getTargetMachine().Options.PPCGenScalarMASSEntries;
+}
+
 SDValue PPCTargetLowering::lowerLibCallBase(const char *LibCallDoubleName,
                                             const char *LibCallFloatName,
                                             const char *LibCallDoubleNameFinite,
                                             const char *LibCallFloatNameFinite,
                                             SDValue Op,
                                             SelectionDAG &DAG) const {
-  if (!isLowringToMASSSafe(Op))
+  if (!isScalarMASSConversionEnabled() || !isLowringToMASSSafe(Op))
     return SDValue();
 
   if (!isLowringToMASSFiniteSafe(Op))
