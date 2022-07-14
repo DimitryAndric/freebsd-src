@@ -1550,6 +1550,7 @@ SRCS_MIN+=	Target/X86/X86PreAMXConfig.cpp
 SRCS_MIN+=	Target/X86/X86PreTileConfig.cpp
 SRCS_MIN+=	Target/X86/X86RegisterBankInfo.cpp
 SRCS_MIN+=	Target/X86/X86RegisterInfo.cpp
+SRCS_MIN+=	Target/X86/X86ReturnThunks.cpp
 SRCS_MIN+=	Target/X86/X86SelectionDAGInfo.cpp
 SRCS_MIN+=	Target/X86/X86ShuffleDecodeConstantPool.cpp
 SRCS_MIN+=	Target/X86/X86SpeculativeExecutionSideEffectSuppression.cpp
@@ -1919,7 +1920,7 @@ llvm/IR/IntrinsicImpl.inc: ${LLVM_SRCS}/include/llvm/IR/Intrinsics.td
 TGHDRS+=	llvm/IR/IntrinsicImpl.inc
 
 .for arch in \
-	AArch64/aarch64 AMDGPU/amdgcn ARM/arm BPF/bpf DirectX/dxil \
+	AArch64/aarch64 AMDGPU/amdgcn ARM/arm BPF/bpf DirectX/dx \
 	Hexagon/hexagon Mips/mips NVPTX/nvvm PowerPC/ppc R600/r600 RISCV/riscv \
 	S390/s390 VE/ve WebAssembly/wasm X86/x86 XCore/xcore
 llvm/IR/Intrinsics${arch:H}.h: ${LLVM_SRCS}/include/llvm/IR/Intrinsics.td
