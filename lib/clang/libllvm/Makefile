@@ -25,6 +25,11 @@ CFLAGS+=	-I${LLVM_SRCS}/lib/Target/${arch}
 
 CFLAGS+=	-I${LLVM_SRCS}/lib/ObjCopy
 
+.if ${TARGET_ARCH} != "amd64"
+CFLAGS+=	-DBLAKE3_NO_AVX512 -DBLAKE3_NO_AVX2 -DBLAKE3_NO_SSE41 \
+		-DBLAKE3_NO_SSE2
+.endif
+
 SRCDIR=		llvm/lib
 
 # Explanation of different SRCS variants below:
@@ -1009,12 +1014,16 @@ SRCS_EXT+=	Support/AddressRanges.cpp
 SRCS_MIN+=	Support/Allocator.cpp
 SRCS_LLD+=	Support/BLAKE3/blake3.c
 SRCS_LLD+=	Support/BLAKE3/blake3_dispatch.c
+.if ${TARGET_ARCH} == "aarch64"
 SRCS_LLD+=	Support/BLAKE3/blake3_neon.c
+.endif
 SRCS_LLD+=	Support/BLAKE3/blake3_portable.c
+.if ${TARGET_ARCH} == "amd64"
 SRCS_LLD+=	Support/BLAKE3/blake3_avx2_x86-64_unix.S
 SRCS_LLD+=	Support/BLAKE3/blake3_sse2_x86-64_unix.S
 SRCS_LLD+=	Support/BLAKE3/blake3_sse41_x86-64_unix.S
 SRCS_LLD+=	Support/BLAKE3/blake3_avx512_x86-64_unix.S
+.endif
 SRCS_MIN+=	Support/BinaryStreamError.cpp
 SRCS_MIN+=	Support/BinaryStreamReader.cpp
 SRCS_MIN+=	Support/BinaryStreamRef.cpp
