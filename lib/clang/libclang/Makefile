@@ -525,6 +525,7 @@ SRCS_MIN+=	Sema/SemaObjCProperty.cpp
 SRCS_MIN+=	Sema/SemaOpenMP.cpp
 SRCS_MIN+=	Sema/SemaOverload.cpp
 SRCS_MIN+=	Sema/SemaPseudoObject.cpp
+SRCS_MIN+=	Sema/SemaRISCVVectorLookup.cpp
 SRCS_MIN+=	Sema/SemaSYCL.cpp
 SRCS_MIN+=	Sema/SemaStmt.cpp
 SRCS_MIN+=	Sema/SemaStmtAsm.cpp
