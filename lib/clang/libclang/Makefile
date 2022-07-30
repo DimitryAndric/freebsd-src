@@ -734,6 +734,7 @@ SRCS_FUL+=	StaticAnalyzer/Frontend/CreateCheckerManager.cpp
 SRCS_FUL+=	StaticAnalyzer/Frontend/FrontendActions.cpp
 SRCS_FUL+=	StaticAnalyzer/Frontend/ModelConsumer.cpp
 SRCS_FUL+=	StaticAnalyzer/Frontend/ModelInjector.cpp
+SRCS_MIN+=	Support/RISCVVIntrinsicUtils.cpp
 SRCS_MIN+=	Tooling/ArgumentsAdjusters.cpp
 SRCS_MIN+=	Tooling/CommonOptionsParser.cpp
 SRCS_MIN+=	Tooling/CompilationDatabase.cpp
