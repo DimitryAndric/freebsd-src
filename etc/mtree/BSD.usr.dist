@@ -47,6 +47,8 @@
                     ..
                     openmp_wrappers
                     ..
+                    orc_rt
+                    ..
                     ppc_wrappers
                     ..
                     profile
