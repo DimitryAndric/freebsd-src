@@ -673,11 +673,14 @@ SRCS_XDB+=	ExecutionEngine/Interpreter/ExternalFunctions.cpp
 SRCS_XDB+=	ExecutionEngine/Interpreter/Interpreter.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/COFF.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/COFF_x86_64.cpp
+SRCS_EXT+=	ExecutionEngine/JITLink/COFFDirectiveParser.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/COFFLinkGraphBuilder.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/DWARFRecordSectionSplitter.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/EHFrameSupport.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELF.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELF_aarch64.cpp
+SRCS_EXT+=	ExecutionEngine/JITLink/ELF_i386.cpp
+SRCS_EXT+=	ExecutionEngine/JITLink/ELF_loongarch.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELF_riscv.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELF_x86_64.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/ELFLinkGraphBuilder.cpp
@@ -688,8 +691,9 @@ SRCS_EXT+=	ExecutionEngine/JITLink/MachO.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/MachOLinkGraphBuilder.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/MachO_arm64.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/MachO_x86_64.cpp
-SRCS_EXT+=	ExecutionEngine/JITLink/MemoryFlags.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/aarch64.cpp
+SRCS_EXT+=	ExecutionEngine/JITLink/i386.cpp
+SRCS_EXT+=	ExecutionEngine/JITLink/loongarch.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/riscv.cpp
 SRCS_EXT+=	ExecutionEngine/JITLink/x86_64.cpp
 SRCS_XDB+=	ExecutionEngine/MCJIT/MCJIT.cpp
@@ -1476,6 +1480,7 @@ SRCS_MIN+=	Target/RISCV/GISel/RISCVCallLowering.cpp
 SRCS_MIN+=	Target/RISCV/GISel/RISCVInstructionSelector.cpp
 SRCS_MIN+=	Target/RISCV/GISel/RISCVLegalizerInfo.cpp
 SRCS_MIN+=	Target/RISCV/GISel/RISCVRegisterBankInfo.cpp
+SRCS_EXT+=	Target/RISCV/MCA/RISCVCustomBehaviour.cpp
 SRCS_MIN+=	Target/RISCV/MCTargetDesc/RISCVAsmBackend.cpp
 SRCS_MIN+=	Target/RISCV/MCTargetDesc/RISCVBaseInfo.cpp
 SRCS_MIN+=	Target/RISCV/MCTargetDesc/RISCVELFObjectWriter.cpp
@@ -1994,6 +1999,14 @@ llvm-dlltool/Options.inc: ${LLVM_SRCS}/lib/ToolDrivers/llvm-dlltool/Options.td
 	    ${LLVM_SRCS}/lib/ToolDrivers/llvm-dlltool/Options.td
 TGHDRS+=	llvm-dlltool/Options.inc
 CFLAGS.DlltoolDriver.cpp+=	-I${.OBJDIR}/llvm-dlltool
+
+.if ${MK_CLANG_EXTRAS} != "no"
+COFFOptions.inc: ${LLVM_SRCS}/lib/ExecutionEngine/JITLink/COFFOptions.td
+	${LLVM_TBLGEN} -gen-opt-parser-defs \
+	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
+	    ${LLVM_SRCS}/lib/ExecutionEngine/JITLink/COFFOptions.td
+TGHDRS+=	COFFOptions.inc
+.endif
 
 beforebuild:
 # 20170724 remove stale Options.inc file, of which there are two different

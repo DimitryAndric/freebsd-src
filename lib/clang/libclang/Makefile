@@ -394,6 +394,7 @@ SRCS_EXT+=	Format/DefinitionBlockSeparator.cpp
 SRCS_EXT+=	Format/Format.cpp
 SRCS_EXT+=	Format/FormatToken.cpp
 SRCS_EXT+=	Format/FormatTokenLexer.cpp
+SRCS_EXT+=	Format/IntegerLiteralSeparatorFixer.cpp
 SRCS_EXT+=	Format/NamespaceEndCommentsFixer.cpp
 SRCS_EXT+=	Format/QualifierAlignmentFixer.cpp
 SRCS_EXT+=	Format/SortJavaScriptImports.cpp
