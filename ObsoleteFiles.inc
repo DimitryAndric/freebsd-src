@@ -376,6 +376,11 @@ OLD_FILES+=usr/lib/clang/15.0.7/share/msan_ignorelist.txt
 OLD_DIRS+=usr/lib/clang/15.0.7/share
 OLD_DIRS+=usr/lib/clang/15.0.7
 
+# 2023mmdd: new libc++ import which bumps version from 15.0.7 to 16.0.1
+OLD_FILES+=usr/include/c++/v1/__bits
+OLD_FILES+=usr/include/c++/v1/__tuple
+OLD_FILES+=usr/include/c++/v1/__utility/transaction.h
+
 # 20230614: caroot bundle updated
 OLD_FILES+=usr/share/certs/trusted/Cybertrust_Global_Root.pem
 OLD_FILES+=usr/share/certs/trusted/DST_Root_CA_X3.pem
