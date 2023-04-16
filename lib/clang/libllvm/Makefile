@@ -1986,6 +1986,12 @@ llvm/IR/Intrinsics${arch:H}.h: ${LLVM_SRCS}/include/llvm/IR/Intrinsics.td
 TGHDRS+=	llvm/IR/Intrinsics${arch:H}.h
 .endfor
 
+llvm/TargetParser/RISCVTargetParserDef.inc: ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
+	${LLVM_TBLGEN} -gen-riscv-target-def \
+           -I ${LLVM_SRCS}/include -I ${LLVM_SRCS}/lib/Target/RISCV \
+           -d ${.TARGET}.d -o ${.TARGET} ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
+TGHDRS+=	llvm/TargetParser/RISCVTargetParserDef.inc
+
 llvm-lib/Options.inc: ${LLVM_SRCS}/lib/ToolDrivers/llvm-lib/Options.td
 	${LLVM_TBLGEN} -gen-opt-parser-defs \
 	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
@@ -2150,12 +2156,6 @@ TGHDRS+=	RISCVGenRegisterInfo.inc
 TGHDRS+=	RISCVGenSearchableTables.inc
 TGHDRS+=	RISCVGenSubtargetInfo.inc
 TGHDRS+=	RISCVGenSystemOperands.inc
-
-llvm/TargetParser/RISCVTargetParserDef.inc: ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
-	${LLVM_TBLGEN} -gen-riscv-target-def \
-           -I ${LLVM_SRCS}/include -I ${LLVM_SRCS}/lib/Target/RISCV \
-           -d ${.TARGET}.d -o ${.TARGET} ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
-TGHDRS+=	llvm/TargetParser/RISCVTargetParserDef.inc
 .endif # MK_LLVM_TARGET_RISCV
 .if ${MK_LLVM_TARGET_X86} != "no"
 TGHDRS+=	X86GenAsmMatcher.inc
