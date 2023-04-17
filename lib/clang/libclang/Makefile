@@ -675,6 +675,7 @@ SRCS_FUL+=	StaticAnalyzer/Checkers/UndefCapturedBlockVarChecker.cpp
 SRCS_FUL+=	StaticAnalyzer/Checkers/UndefResultChecker.cpp
 SRCS_FUL+=	StaticAnalyzer/Checkers/UndefinedArraySubscriptChecker.cpp
 SRCS_FUL+=	StaticAnalyzer/Checkers/UndefinedAssignmentChecker.cpp
+SRCS_FUL+=	StaticAnalyzer/Checkers/UndefinedNewArraySizeChecker.cpp
 SRCS_FUL+=	StaticAnalyzer/Checkers/UninitializedObject/UninitializedObjectChecker.cpp
 SRCS_FUL+=	StaticAnalyzer/Checkers/UninitializedObject/UninitializedPointee.cpp
 SRCS_FUL+=	StaticAnalyzer/Checkers/UnixAPIChecker.cpp
