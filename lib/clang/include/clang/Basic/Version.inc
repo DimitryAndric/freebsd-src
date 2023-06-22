@@ -1,5 +1,3 @@
-/* $FreeBSD$ */
-
 #define	CLANG_VERSION			16.0.6
 #define	CLANG_VERSION_STRING		"16.0.6"
 #define	CLANG_VERSION_MAJOR		16
