@@ -39,6 +39,8 @@
             17
                 include
                     cuda_wrappers
+                        bits
+                        ..
                     ..
                     fuzzer
                     ..
