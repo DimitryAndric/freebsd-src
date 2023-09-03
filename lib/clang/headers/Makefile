@@ -4,7 +4,7 @@
 .PATH:		${CLANG_SRCS}/lib/Headers
 
 INCSGROUPS=	INCS CUDA HLSL OMP ORC PPC
-INCSDIR=	${LIBDIR}/clang/16/include
+INCSDIR=	${LIBDIR}/clang/17/include
 CUDADIR=	${INCSDIR}/cuda_wrappers
 HLSLDIR=	${INCSDIR}/hlsl
 OMPDIR=		${INCSDIR}/openmp_wrappers
