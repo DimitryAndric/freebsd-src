@@ -44,6 +44,7 @@ SRCS+=		GlobalISel/GIMatchDagOperands.cpp
 SRCS+=		GlobalISel/GIMatchDagPredicate.cpp
 SRCS+=		GlobalISel/GIMatchDagPredicateDependencyEdge.cpp
 SRCS+=		GlobalISel/GIMatchTree.cpp
+SRCS+=		GlobalISelCombinerMatchTableEmitter.cpp
 SRCS+=		GlobalISelEmitter.cpp
 SRCS+=		GlobalISelMatchTable.cpp
 SRCS+=		GlobalISelMatchTableExecutorEmitter.cpp

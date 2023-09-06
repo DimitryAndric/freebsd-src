@@ -2024,10 +2024,10 @@ beforebuild:
 	MCCodeEmitter/-gen-emitter \
 	MCPseudoLowering/-gen-pseudo-lowering \
 	MnemonicTables/-gen-x86-mnemonic-tables,-asmwriternum=1 \
-	O0PreLegalizeGICombiner/-gen-global-isel-combiner,-combiners=${arch:H}O0PreLegalizerCombinerHelper \
-	PostLegalizeGICombiner/-gen-global-isel-combiner,-combiners=${arch:H}PostLegalizerCombinerHelper \
-	PostLegalizeGILowering/-gen-global-isel-combiner,-combiners=${arch:H}PostLegalizerLoweringHelper \
-	PreLegalizeGICombiner/-gen-global-isel-combiner,-combiners=${arch:H}PreLegalizerCombinerHelper \
+	O0PreLegalizeGICombiner/-gen-global-isel-combiner-matchtable,-combiners=${arch:H}O0PreLegalizerCombiner \
+	PostLegalizeGICombiner/-gen-global-isel-combiner-matchtable,-combiners=${arch:H}PostLegalizerCombiner \
+	PostLegalizeGILowering/-gen-global-isel-combiner-matchtable,-combiners=${arch:H}PostLegalizerLowering \
+	PreLegalizeGICombiner/-gen-global-isel-combiner-matchtable,-combiners=${arch:H}PreLegalizerCombiner \
 	RegisterBank/-gen-register-bank \
 	RegisterInfo/-gen-register-info \
 	SearchableTables/-gen-searchable-tables \
