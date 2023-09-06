@@ -1099,7 +1099,6 @@ SRCS_MIN+=	Support/LEB128.cpp
 SRCS_MIN+=	Support/LineIterator.cpp
 SRCS_MIN+=	Support/Locale.cpp
 SRCS_MIN+=	Support/LockFileManager.cpp
-SRCS_MIN+=	Support/LowLevelType.cpp
 SRCS_MIN+=	Support/MD5.cpp
 SRCS_MIW+=	Support/MSP430AttributeParser.cpp
 SRCS_MIW+=	Support/MSP430Attributes.cpp
