@@ -383,7 +383,6 @@ SRCS_MIN+=	ExtractAPI/APIIgnoresList.cpp
 SRCS_MIN+=	ExtractAPI/AvailabilityInfo.cpp
 SRCS_MIN+=	ExtractAPI/DeclarationFragments.cpp
 SRCS_MIN+=	ExtractAPI/ExtractAPIConsumer.cpp
-SRCS_MIN+=	ExtractAPI/ExtractAPIVisitor.cpp
 SRCS_MIN+=	ExtractAPI/Serialization/SymbolGraphSerializer.cpp
 SRCS_MIN+=	ExtractAPI/TypedefUnderlyingTypeResolver.cpp
 SRCS_EXT+=	Format/AffectedRangeManager.cpp
