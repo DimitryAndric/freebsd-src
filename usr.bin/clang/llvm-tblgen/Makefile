@@ -77,13 +77,11 @@ SRCS+=		X86RecognizableInstr.cpp
 
 .include "${SRCTOP}/lib/clang/llvm.pre.mk"
 
-GENVT_INC=	llvm/CodeGen/GenVT.inc
-GENVT_SRC=	${LLVM_SRCS}/include/llvm/CodeGen/ValueTypes.td
-
-${GENVT_INC}: ${GENVT_SRC}
-	${LLVM_MIN_TBLGEN} -gen-vt -I ${LLVM_SRCS}/include -d ${.TARGET}.d \
-	    -o ${.TARGET} ${GENVT_SRC}
-TGHDRS+=	${GENVT_INC}
+llvm/CodeGen/GenVT.inc: ${LLVM_SRCS}/include/llvm/CodeGen/ValueTypes.td
+	${LLVM_MIN_TBLGEN} -gen-vt \
+	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
+	    ${LLVM_SRCS}/include/llvm/CodeGen/ValueTypes.td
+TGHDRS+=	llvm/CodeGen/GenVT.inc
 
 DEPENDFILES+=	${TGHDRS:C/$/.d/}
 DPSRCS+=	${TGHDRS}

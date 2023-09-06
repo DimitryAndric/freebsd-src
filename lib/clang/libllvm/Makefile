@@ -1918,6 +1918,12 @@ SRCS_ALL+=	${SRCS_XDW}
 SRCS+=		${GENSRCS}
 SRCS+=		${SRCS_ALL:O}
 
+llvm/CodeGen/GenVT.inc: ${LLVM_SRCS}/include/llvm/CodeGen/ValueTypes.td
+	${LLVM_MIN_TBLGEN} -gen-vt \
+	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
+	    ${LLVM_SRCS}/include/llvm/CodeGen/ValueTypes.td
+TGHDRS+=	llvm/CodeGen/GenVT.inc
+
 llvm/Frontend/OpenMP/OMP.h.inc: ${LLVM_SRCS}/include/llvm/Frontend/OpenMP/OMP.td
 	${LLVM_TBLGEN} --gen-directive-decl \
 	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
@@ -1968,8 +1974,8 @@ TGHDRS+=	llvm/IR/Intrinsics${arch:H}.h
 
 llvm/TargetParser/RISCVTargetParserDef.inc: ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
 	${LLVM_TBLGEN} -gen-riscv-target-def \
-           -I ${LLVM_SRCS}/include -I ${LLVM_SRCS}/lib/Target/RISCV \
-           -d ${.TARGET}.d -o ${.TARGET} ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
+	    -I ${LLVM_SRCS}/include -I ${LLVM_SRCS}/lib/Target/RISCV \
+	    -d ${.TARGET}.d -o ${.TARGET} ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
 TGHDRS+=	llvm/TargetParser/RISCVTargetParserDef.inc
 
 llvm-lib/Options.inc: ${LLVM_SRCS}/lib/ToolDrivers/llvm-lib/Options.td
