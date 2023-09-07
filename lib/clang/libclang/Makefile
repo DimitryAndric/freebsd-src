@@ -912,6 +912,12 @@ clang/Basic/AttrSubMatchRulesList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
 TGHDRS+=	clang/Basic/AttrSubMatchRulesList.inc
 
+clang/Basic/AttrTokenKinds.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
+	${CLANG_TBLGEN} -gen-clang-attr-token-kinds \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
+TGHDRS+=	clang/Basic/AttrTokenKinds.inc
+
 .for hdr in \
 	AST Analysis Comment Common CrossTU Driver Frontend Lex Parse \
 	Refactoring Sema Serialization SemaSerialization
@@ -949,12 +955,6 @@ clang/Basic/arm_neon.inc: ${CLANG_SRCS}/include/clang/Basic/arm_neon.td
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_neon.td
 TGHDRS+=	clang/Basic/arm_neon.inc
 
-clang/Basic/arm_cde_builtins.inc: ${CLANG_SRCS}/include/clang/Basic/arm_cde.td
-	${CLANG_TBLGEN} -gen-arm-cde-builtin-def \
-	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
-	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_cde.td
-TGHDRS+=	clang/Basic/arm_cde_builtins.inc
-
 clang/Basic/arm_cde_builtin_aliases.inc: \
 	${CLANG_SRCS}/include/clang/Basic/arm_cde.td
 	${CLANG_TBLGEN} -gen-arm-cde-builtin-aliases \
@@ -975,11 +975,11 @@ clang/Basic/arm_cde_builtin_sema.inc: \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_cde.td
 TGHDRS+=	clang/Basic/arm_cde_builtin_sema.inc
 
-clang/Basic/arm_mve_builtins.inc: ${CLANG_SRCS}/include/clang/Basic/arm_mve.td
-	${CLANG_TBLGEN} -gen-arm-mve-builtin-def \
+clang/Basic/arm_cde_builtins.inc: ${CLANG_SRCS}/include/clang/Basic/arm_cde.td
+	${CLANG_TBLGEN} -gen-arm-cde-builtin-def \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
-	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_mve.td
-TGHDRS+=	clang/Basic/arm_mve_builtins.inc
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_cde.td
+TGHDRS+=	clang/Basic/arm_cde_builtins.inc
 
 clang/Basic/arm_mve_builtin_aliases.inc: \
 	${CLANG_SRCS}/include/clang/Basic/arm_mve.td
@@ -1001,11 +1001,32 @@ clang/Basic/arm_mve_builtin_sema.inc: \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_mve.td
 TGHDRS+=	clang/Basic/arm_mve_builtin_sema.inc
 
-clang/Basic/arm_sve_builtins.inc: ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
-	${CLANG_TBLGEN} -gen-arm-sve-builtins \
+clang/Basic/arm_mve_builtins.inc: ${CLANG_SRCS}/include/clang/Basic/arm_mve.td
+	${CLANG_TBLGEN} -gen-arm-mve-builtin-def \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
-	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
-TGHDRS+=	clang/Basic/arm_sve_builtins.inc
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_mve.td
+TGHDRS+=	clang/Basic/arm_mve_builtins.inc
+
+clang/Basic/arm_sme_builtin_cg.inc: \
+	${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+	${CLANG_TBLGEN} -gen-arm-sme-builtin-codegen \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+TGHDRS+=	clang/Basic/arm_sme_builtin_cg.inc
+
+clang/Basic/arm_sme_sema_rangechecks.inc: \
+	${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+	${CLANG_TBLGEN} -gen-arm-sme-sema-rangechecks \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+TGHDRS+=	clang/Basic/arm_sme_sema_rangechecks.inc
+
+clang/Basic/arm_sme_builtins.inc: \
+	${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+	${CLANG_TBLGEN} -gen-arm-sme-builtins \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+TGHDRS+=	clang/Basic/arm_sme_builtins.inc
 
 clang/Basic/arm_sve_builtin_cg.inc: ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
 	${CLANG_TBLGEN} -gen-arm-sve-builtin-codegen \
@@ -1027,12 +1048,32 @@ clang/Basic/arm_sve_typeflags.inc: \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
 TGHDRS+=	clang/Basic/arm_sve_typeflags.inc
 
-clang/Basic/riscv_vector_builtins.inc: \
-	${CLANG_SRCS}/include/clang/Basic/riscv_vector.td
-	${CLANG_TBLGEN} -gen-riscv-vector-builtins \
+clang/Basic/arm_sve_builtins.inc: ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
+	${CLANG_TBLGEN} -gen-arm-sve-builtins \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
-	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_vector.td
-TGHDRS+=	clang/Basic/riscv_vector_builtins.inc
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
+TGHDRS+=	clang/Basic/arm_sve_builtins.inc
+
+clang/Basic/riscv_sifive_vector_builtin_cg.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
+	${CLANG_TBLGEN} -gen-riscv-sifive-vector-builtin-codegen \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
+TGHDRS+=	clang/Basic/riscv_sifive_vector_builtin_cg.inc
+
+clang/Basic/riscv_sifive_vector_builtin_sema.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
+	${CLANG_TBLGEN} -gen-riscv-sifive-vector-builtin-sema \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
+TGHDRS+=	clang/Basic/riscv_sifive_vector_builtin_sema.inc
+
+clang/Basic/riscv_sifive_vector_builtins.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
+	${CLANG_TBLGEN} -gen-riscv-sifive-vector-builtins \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
+TGHDRS+=	clang/Basic/riscv_sifive_vector_builtins.inc
 
 clang/Basic/riscv_vector_builtin_cg.inc: \
 	${CLANG_SRCS}/include/clang/Basic/riscv_vector.td
@@ -1047,6 +1088,13 @@ clang/Basic/riscv_vector_builtin_sema.inc: \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_vector.td
 TGHDRS+=	clang/Basic/riscv_vector_builtin_sema.inc
+
+clang/Basic/riscv_vector_builtins.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_vector.td
+	${CLANG_TBLGEN} -gen-riscv-vector-builtins \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_vector.td
+TGHDRS+=	clang/Basic/riscv_vector_builtins.inc
 
 clang/Driver/Options.inc: ${CLANG_SRCS}/include/clang/Driver/Options.td
 	${LLVM_TBLGEN} -gen-opt-parser-defs \

@@ -2025,6 +2025,7 @@ beforebuild:
 	DisassemblerTables/-gen-disassembler \
 	EVEX2VEXTables/-gen-x86-EVEX2VEX-tables \
 	FastISel/-gen-fast-isel \
+	FoldTables/-gen-x86-fold-tables,-asmwriternum=1 \
 	GlobalISel/-gen-global-isel \
 	InstrInfo/-gen-instr-info${arch:MX86/X86:C/X86\/X86/,-instr-info-expand-mi-operand-info=0/} \
 	MCCodeEmitter/-gen-emitter \
@@ -2152,6 +2153,7 @@ TGHDRS+=	X86GenDAGISel.inc
 TGHDRS+=	X86GenDisassemblerTables.inc
 TGHDRS+=	X86GenEVEX2VEXTables.inc
 TGHDRS+=	X86GenFastISel.inc
+TGHDRS+=	X86GenFoldTables.inc
 TGHDRS+=	X86GenGlobalISel.inc
 TGHDRS+=	X86GenInstrInfo.inc
 TGHDRS+=	X86GenMnemonicTables.inc
