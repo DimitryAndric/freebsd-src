@@ -38,7 +38,6 @@ INCS+=		arm64intr.h
 INCS+=		arm_acle.h
 INCS+=		arm_cmse.h
 INCS+=		arm_neon_sve_bridge.h
-INCS+=		arm_sme_draft_spec_subject_to_change.h
 INCS+=		armintr.h
 INCS+=		avx2intrin.h
 INCS+=		avx512bf16intrin.h
@@ -224,6 +223,12 @@ arm_${hdr:H}.h: ${CLANG_SRCS}/include/clang/Basic/arm_${hdr:H}.td
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_${hdr:H}.td
 GENINCS+=	arm_${hdr:H}.h
 .endfor
+
+arm_sme_draft_spec_subject_to_change.h: ${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+	${CLANG_TBLGEN} -gen-arm-sme-header \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sme.td
+GENINCS+=	arm_sme_draft_spec_subject_to_change.h
 
 .for hdr in vector/vector-header
 riscv_${hdr:H}.h: ${CLANG_SRCS}/include/clang/Basic/riscv_${hdr:H}.td
