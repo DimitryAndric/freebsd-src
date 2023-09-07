@@ -72,9 +72,8 @@ SRCS+=		ELF/SyntheticSections.cpp
 SRCS+=		ELF/Target.cpp
 SRCS+=		ELF/Thunks.cpp
 SRCS+=		ELF/Writer.cpp
+SRCS+=		lld-driver.cpp
 SRCS+=		tools/lld/lld.cpp
-
-CFLAGS.lld.cpp+=	-Dlld_main=main
 
 .include "${SRCTOP}/lib/clang/llvm.build.mk"
 
