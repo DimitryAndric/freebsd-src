@@ -429,6 +429,30 @@ OLD_FILES+=usr/lib/clang/16/share/msan_ignorelist.txt
 OLD_DIRS+=usr/lib/clang/16/share
 OLD_DIRS+=usr/lib/clang/16
 
+# 2023mmdd: new libc++ import which bumps version from 16 to 17
+OLD_FILES+=usr/include/c++/v1/__bsd_locale_defaults.h
+OLD_FILES+=usr/include/c++/v1/__bsd_locale_fallbacks.h
+OLD_FILES+=usr/include/c++/v1/__debug
+OLD_FILES+=usr/include/c++/v1/__errc
+OLD_FILES+=usr/include/c++/v1/__functional/unwrap_ref.h
+OLD_FILES+=usr/include/c++/v1/__mutex_base
+OLD_FILES+=usr/include/c++/v1/__ranges/copyable_box.h
+OLD_FILES+=usr/include/c++/v1/__std_stream
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/apply_cv.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/make_tuple_types.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/pair_like.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/sfinae_helpers.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/tuple_element.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/tuple_indices.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/tuple_like.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/tuple_like_ext.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/tuple_size.h
+OLD_FILES+=usr/include/c++/v1/__tuple_dir/tuple_types.h
+OLD_DIRS+=usr/include/c++/v1/__tuple_dir
+OLD_FILES+=usr/include/c++/v1/experimental/algorithm
+OLD_FILES+=usr/include/c++/v1/experimental/coroutine
+OLD_FILES+=usr/include/c++/v1/experimental/functional
+
 # 20231018: pmc.k7(3) removed
 OLD_FILES+=usr/share/man/man3/pmc.k7.3.gz
 
