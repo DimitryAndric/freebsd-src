@@ -3,6 +3,8 @@
 
 LIB=		clang_rt.xray-${CRTARCH}
 
+CFLAGS+=	-DSANITIZER_COMMON_NO_REDEFINE_BUILTINS
+
 SRCS+=		sanitizer_common/sanitizer_allocator.cpp
 SRCS+=		sanitizer_common/sanitizer_allocator_checks.cpp
 SRCS+=		sanitizer_common/sanitizer_common.cpp
