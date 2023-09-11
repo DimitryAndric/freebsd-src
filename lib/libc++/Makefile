@@ -44,6 +44,7 @@ SRCS+=		memory.cpp
 SRCS+=		memory_resource.cpp
 SRCS+=		mutex.cpp
 SRCS+=		mutex_destructor.cpp
+SRCS+=		new.cpp
 SRCS+=		new_handler.cpp
 SRCS+=		new_helpers.cpp
 SRCS+=		optional.cpp
