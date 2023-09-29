@@ -3,9 +3,10 @@
 
 .PATH:		${CLANG_SRCS}/lib/Headers
 
-INCSGROUPS=	INCS CUDA HLSL OMP ORC PPC
+INCSGROUPS=	INCS CUDA CUDB HLSL OMP ORC PPC
 INCSDIR=	${LIBDIR}/clang/17/include
 CUDADIR=	${INCSDIR}/cuda_wrappers
+CUDBDIR=	${INCSDIR}/cuda_wrappers/bits
 HLSLDIR=	${INCSDIR}/hlsl
 OMPDIR=		${INCSDIR}/openmp_wrappers
 PPCDIR=		${INCSDIR}/ppc_wrappers
@@ -186,10 +187,13 @@ INCS+=		varargs.h
 .endif # INSTALL_CONFLICTING_CLANG_HEADERS
 
 CUDA+=		cuda_wrappers/algorithm
-CUDA+=		cuda_wrappers/bits/shared_ptr_base.h
 CUDA+=		cuda_wrappers/cmath
 CUDA+=		cuda_wrappers/complex
 CUDA+=		cuda_wrappers/new
+
+CUDB+=		cuda_wrappers/bits/basic_string.h
+CUDB+=		cuda_wrappers/bits/basic_string.tcc
+CUDB+=		cuda_wrappers/bits/shared_ptr_base.h
 
 HLSL+=		hlsl/hlsl_basic_types.h
 HLSL+=		hlsl/hlsl_intrinsics.h
