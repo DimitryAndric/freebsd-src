@@ -1562,7 +1562,6 @@ SRCS_MIN+=	Target/RISCV/RISCVInsertVSETVLI.cpp
 SRCS_MIN+=	Target/RISCV/RISCVInsertWriteVXRM.cpp
 SRCS_MIN+=	Target/RISCV/RISCVInstrInfo.cpp
 SRCS_MIN+=	Target/RISCV/RISCVMachineFunctionInfo.cpp
-SRCS_MIN+=	Target/RISCV/RISCVMacroFusion.cpp
 SRCS_MIN+=	Target/RISCV/RISCVMakeCompressible.cpp
 SRCS_MIN+=	Target/RISCV/RISCVMergeBaseOffset.cpp
 SRCS_MIN+=	Target/RISCV/RISCVMoveMerger.cpp
