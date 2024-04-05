@@ -143,6 +143,7 @@ OLD_DIRS+=usr/lib/clang/17/include/cuda_wrappers/bits
 OLD_FILES+=usr/lib/clang/17/include/cuda_wrappers/cmath
 OLD_FILES+=usr/lib/clang/17/include/cuda_wrappers/complex
 OLD_FILES+=usr/lib/clang/17/include/cuda_wrappers/new
+OLD_FILES+=usr/lib/clang/17/include/cuda_wrappers/shared_ptr_base.h
 OLD_DIRS+=usr/lib/clang/17/include/cuda_wrappers
 OLD_FILES+=usr/lib/clang/17/include/emmintrin.h
 OLD_FILES+=usr/lib/clang/17/include/enqcmdintrin.h
