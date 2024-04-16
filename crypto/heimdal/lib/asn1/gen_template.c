@@ -501,7 +501,7 @@ template_members(struct templatehead *temp, const char *basetype, const char *na
 	else if (t->range->min >= 0 && t->range->max <= UINT_MAX)
 	    itype = "UNSIGNED";
 	else
-	    errx(1, "%s: unsupported range %lld -> %lld",
+	    errx(1, "%s: unsupported range %" PRId64 " -> %" PRId64,
 		 name, t->range->min, t->range->max);
 
 	add_line(temp, "{ A1_PARSE_T(A1T_%s), %s, NULL }", itype, poffset);

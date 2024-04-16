@@ -189,19 +189,19 @@ range_check(const char *name,
 {
     if (r->min == r->max + 2 || r->min < r->max)
 	fprintf (codefile,
-		 "if ((%s)->%s > %lld) {\n"
+		 "if ((%s)->%s > %" PRId64 ") {\n"
 		 "e = ASN1_MAX_CONSTRAINT; %s;\n"
 		 "}\n",
 		 name, length, r->max, forwstr);
     if (r->min - 1 == r->max || r->min < r->max)
 	fprintf (codefile,
-		 "if ((%s)->%s < %lld) {\n"
+		 "if ((%s)->%s < %" PRId64 ") {\n"
 		 "e = ASN1_MIN_CONSTRAINT; %s;\n"
 		 "}\n",
 		 name, length, r->min, forwstr);
     if (r->max == r->min)
 	fprintf (codefile,
-		 "if ((%s)->%s != %lld) {\n"
+		 "if ((%s)->%s != %" PRId64 ") {\n"
 		 "e = ASN1_EXACT_CONSTRAINT; %s;\n"
 		 "}\n",
 		 name, length, r->min, forwstr);
@@ -261,7 +261,7 @@ decode_type (const char *name, const Type *t, int optional,
 	} else if (t->range->min >= 0 && t->range->max <= UINT_MAX) {
 	    decode_primitive ("unsigned", name, forwstr);
 	} else
-	    errx(1, "%s: unsupported range %lld -> %lld",
+	    errx(1, "%s: unsupported range %" PRId64 " -> %" PRId64,
 		 name, t->range->min, t->range->max);
 	break;
     case TBoolean:

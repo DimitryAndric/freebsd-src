@@ -303,7 +303,7 @@ gen_assign_defval(const char *var, struct value *val)
 	fprintf(codefile, "if((%s = strdup(\"%s\")) == NULL)\nreturn ENOMEM;\n", var, val->u.stringvalue);
 	break;
     case integervalue:
-	fprintf(codefile, "%s = %lld;\n", var, val->u.integervalue);
+	fprintf(codefile, "%s = %" PRId64 ";\n", var, val->u.integervalue);
 	break;
     case booleanvalue:
 	if(val->u.booleanvalue)
@@ -324,7 +324,7 @@ gen_compare_defval(const char *var, struct value *val)
 	fprintf(codefile, "if(strcmp(%s, \"%s\") != 0)\n", var, val->u.stringvalue);
 	break;
     case integervalue:
-	fprintf(codefile, "if(%s != %lld)\n", var, val->u.integervalue);
+	fprintf(codefile, "if(%s != %" PRId64 ")\n", var, val->u.integervalue);
 	break;
     case booleanvalue:
 	if(val->u.booleanvalue)
@@ -397,7 +397,7 @@ generate_constant (const Symbol *s)
     case booleanvalue:
 	break;
     case integervalue:
-	fprintf (headerfile, "enum { %s = %lld };\n\n",
+	fprintf (headerfile, "enum { %s = %" PRId64 " };\n\n",
 		 s->gen_name, s->value->u.integervalue);
 	break;
     case nullvalue:
@@ -540,7 +540,7 @@ define_asn1 (int level, Type *t)
 	if(t->members == NULL) {
             fprintf (headerfile, "INTEGER");
 	    if (t->range)
-		fprintf (headerfile, " (%lld..%lld)",
+		fprintf (headerfile, " (%" PRId64 "..%" PRId64 ")",
 			 t->range->min, t->range->max);
         } else {
 	    Member *m;
@@ -732,7 +732,7 @@ define_type (int level, const char *name, const char *basename, Type *t, int typ
 	} else if (t->range->min >= 0 && t->range->max <= UINT_MAX) {
 	    fprintf (headerfile, "unsigned int %s;\n", name);
 	} else
-	    errx(1, "%s: unsupported range %lld -> %lld",
+	    errx(1, "%s: unsupported range %" PRId64 " -> %" PRId64 "",
 		 name, t->range->min, t->range->max);
 	break;
     case TBoolean:

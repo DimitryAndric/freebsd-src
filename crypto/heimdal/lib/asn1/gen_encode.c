@@ -138,7 +138,7 @@ encode_type (const char *name, const Type *t, const char *tmpstr)
 	} else if (t->range->min >= 0 && t->range->max <= UINT_MAX) {
 	    encode_primitive ("unsigned", name);
 	} else
-	    errx(1, "%s: unsupported range %lld -> %lld",
+	    errx(1, "%s: unsupported range %" PRId64 " -> %" PRId64,
 		 name, t->range->min, t->range->max);
 	constructed = 0;
 	break;

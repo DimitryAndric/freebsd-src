@@ -89,7 +89,7 @@ length_type (const char *name, const Type *t,
 	} else if (t->range->min >= 0 && t->range->max <= UINT_MAX) {
 	    length_primitive ("unsigned", name, variable);
 	} else
-	    errx(1, "%s: unsupported range %lld -> %lld",
+	    errx(1, "%s: unsupported range %" PRId64 " -> %" PRId64,
 		 name, t->range->min, t->range->max);
 
 	break;
