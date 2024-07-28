@@ -949,6 +949,24 @@ clang/Basic/AttrSubMatchRulesList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
 TGHDRS+=	clang/Basic/AttrSubMatchRulesList.inc
 
+clang/Basic/Builtins.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
+	${CLANG_TBLGEN} -gen-clang-builtins \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/Builtins.td
+TGHDRS+=	clang/Basic/Builtins.inc
+
+clang/Basic/BuiltinsBPF.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
+	${CLANG_TBLGEN} -gen-clang-builtins \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/BuiltinsBPF.td
+TGHDRS+=	clang/Basic/BuiltinsBPF.inc
+
+clang/Basic/BuiltinsRISCV.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
+	${CLANG_TBLGEN} -gen-clang-builtins \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/BuiltinsRISCV.td
+TGHDRS+=	clang/Basic/BuiltinsRISCV.inc
+
 clang/Basic/RegularKeywordAttrInfo.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	${CLANG_TBLGEN} -gen-clang-regular-keyword-attr-info \
 	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
@@ -956,8 +974,8 @@ clang/Basic/RegularKeywordAttrInfo.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.t
 TGHDRS+=	clang/Basic/RegularKeywordAttrInfo.inc
 
 .for hdr in \
-	AST Analysis Comment Common CrossTU Driver Frontend Lex Parse \
-	Refactoring Sema Serialization SemaSerialization
+	AST Analysis Comment Common CrossTU Driver Frontend InstallAPI Lex \
+	Parse Refactoring Sema Serialization
 clang/Basic/Diagnostic${hdr}Kinds.inc: \
 	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
 	${CLANG_TBLGEN} -gen-clang-diags-defs -clang-component=${hdr} \

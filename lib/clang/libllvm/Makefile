@@ -2033,12 +2033,6 @@ llvm/Frontend/OpenMP/OMP.inc: ${LLVM_SRCS}/include/llvm/Frontend/OpenMP/OMP.td
 	    ${LLVM_SRCS}/include/llvm/Frontend/OpenMP/OMP.td
 TGHDRS+=	llvm/Frontend/OpenMP/OMP.inc
 
-OMP.cpp: ${LLVM_SRCS}/include/llvm/Frontend/OpenMP/OMP.td
-	${LLVM_TBLGEN} --gen-directive-impl \
-	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
-	    ${LLVM_SRCS}/include/llvm/Frontend/OpenMP/OMP.td
-GENSRCS+=	OMP.cpp
-
 llvm/IR/Attributes.inc: ${LLVM_SRCS}/include/llvm/IR/Attributes.td
 	${LLVM_TBLGEN} -gen-attrs \
 	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
@@ -2060,8 +2054,8 @@ TGHDRS+=	llvm/IR/IntrinsicImpl.inc
 .for arch in \
 	AArch64/aarch64 AMDGPU/amdgcn ARM/arm BPF/bpf DirectX/dx \
 	Hexagon/hexagon LoongArch/loongarch Mips/mips NVPTX/nvvm PowerPC/ppc \
-	R600/r600 RISCV/riscv S390/s390 VE/ve WebAssembly/wasm X86/x86 \
-	XCore/xcore
+	R600/r600 RISCV/riscv S390/s390 SPIRV/spv VE/ve WebAssembly/wasm \
+	X86/x86 XCore/xcore
 llvm/IR/Intrinsics${arch:H}.h: ${LLVM_SRCS}/include/llvm/IR/Intrinsics.td
 	${LLVM_TBLGEN} -gen-intrinsic-enums -intrinsic-prefix=${arch:T} \
 	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
@@ -2069,11 +2063,13 @@ llvm/IR/Intrinsics${arch:H}.h: ${LLVM_SRCS}/include/llvm/IR/Intrinsics.td
 TGHDRS+=	llvm/IR/Intrinsics${arch:H}.h
 .endfor
 
-llvm/TargetParser/RISCVTargetParserDef.inc: ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
-	${LLVM_TBLGEN} -gen-riscv-target-def \
-	    -I ${LLVM_SRCS}/include -I ${LLVM_SRCS}/lib/Target/RISCV \
-	    -d ${.TARGET}.d -o ${.TARGET} ${LLVM_SRCS}/lib/Target/RISCV/RISCV.td
-TGHDRS+=	llvm/TargetParser/RISCVTargetParserDef.inc
+.for arch in AArch64/arm ARM/arm RISCV/riscv
+llvm/TargetParser/${arch:H}TargetParserDef.inc: ${LLVM_SRCS}/lib/Target/${arch:H}/${arch:H}.td
+	${LLVM_TBLGEN} -gen-${arch:T}-target-def \
+	    -I ${LLVM_SRCS}/include -I ${LLVM_SRCS}/lib/Target/${arch:H} \
+	    -d ${.TARGET}.d -o ${.TARGET} ${LLVM_SRCS}/lib/Target/${arch:H}/${arch:H}.td
+TGHDRS+=	llvm/TargetParser/${arch:H}TargetParserDef.inc
+.endfor
 
 llvm-lib/Options.inc: ${LLVM_SRCS}/lib/ToolDrivers/llvm-lib/Options.td
 	${LLVM_TBLGEN} -gen-opt-parser-defs \
@@ -2124,6 +2120,7 @@ beforebuild:
 	FoldTables/-gen-x86-fold-tables,-asmwriternum=1 \
 	GlobalISel/-gen-global-isel \
 	InstrInfo/-gen-instr-info${arch:MX86/X86:C/X86\/X86/,-instr-info-expand-mi-operand-info=0/} \
+	InstrMapping/-gen-x86-instr-mapping \
 	MCCodeEmitter/-gen-emitter \
 	MCPseudoLowering/-gen-pseudo-lowering \
 	MacroFusion/-gen-macro-fusion-pred \
@@ -2263,6 +2260,7 @@ TGHDRS+=	X86GenFastISel.inc
 TGHDRS+=	X86GenFoldTables.inc
 TGHDRS+=	X86GenGlobalISel.inc
 TGHDRS+=	X86GenInstrInfo.inc
+TGHDRS+=	X86GenInstrMapping.inc
 TGHDRS+=	X86GenMnemonicTables.inc
 TGHDRS+=	X86GenRegisterBank.inc
 TGHDRS+=	X86GenRegisterInfo.inc
