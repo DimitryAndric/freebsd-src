@@ -2,6 +2,7 @@ PROG_CXX=	llvm-tblgen
 MAN=
 
 SRCDIR=		llvm/utils/TableGen
+SRCS+=		ARMTargetDefEmitter.cpp
 SRCS+=		AsmMatcherEmitter.cpp
 SRCS+=		AsmWriterEmitter.cpp
 SRCS+=		Attributes.cpp
@@ -65,6 +66,7 @@ SRCS+=		VTEmitter.cpp
 SRCS+=		WebAssemblyDisassemblerEmitter.cpp
 SRCS+=		X86DisassemblerTables.cpp
 SRCS+=		X86FoldTablesEmitter.cpp
+SRCS+=		X86InstrMappingEmitter.cpp
 SRCS+=		X86MnemonicTables.cpp
 SRCS+=		X86ModRMFilters.cpp
 SRCS+=		X86RecognizableInstr.cpp
