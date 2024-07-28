@@ -91,9 +91,6 @@ SRCS_MIN+=	AST/ExternalASTSource.cpp
 SRCS_MIN+=	AST/FormatString.cpp
 SRCS_MIN+=	AST/InheritViz.cpp
 SRCS_MIN+=	AST/Interp/ByteCodeEmitter.cpp
-SRCS_MIN+=	AST/Interp/ByteCodeExprGen.cpp
-SRCS_MIN+=	AST/Interp/ByteCodeGenError.cpp
-SRCS_MIN+=	AST/Interp/ByteCodeStmtGen.cpp
 SRCS_MIN+=	AST/Interp/Context.cpp
 SRCS_MIN+=	AST/Interp/Descriptor.cpp
 SRCS_MIN+=	AST/Interp/EvalEmitter.cpp
@@ -414,7 +411,6 @@ SRCS_MIN+=	Edit/EditedSource.cpp
 SRCS_MIN+=	Edit/RewriteObjCFoundationAPI.cpp
 SRCS_MIN+=	ExtractAPI/API.cpp
 SRCS_MIN+=	ExtractAPI/APIIgnoresList.cpp
-SRCS_MIN+=	ExtractAPI/AvailabilityInfo.cpp
 SRCS_MIN+=	ExtractAPI/DeclarationFragments.cpp
 SRCS_MIN+=	ExtractAPI/ExtractAPIConsumer.cpp
 SRCS_MIN+=	ExtractAPI/Serialization/SymbolGraphSerializer.cpp
@@ -574,7 +570,6 @@ SRCS_MIN+=	Sema/SemaObjCProperty.cpp
 SRCS_MIN+=	Sema/SemaOpenMP.cpp
 SRCS_MIN+=	Sema/SemaOverload.cpp
 SRCS_MIN+=	Sema/SemaPseudoObject.cpp
-SRCS_MIN+=	Sema/SemaRISCVVectorLookup.cpp
 SRCS_MIN+=	Sema/SemaSYCL.cpp
 SRCS_MIN+=	Sema/SemaStmt.cpp
 SRCS_MIN+=	Sema/SemaStmtAsm.cpp
@@ -941,18 +936,6 @@ clang/Basic/AttrHasAttributeImpl.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
 	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
 TGHDRS+=	clang/Basic/AttrHasAttributeImpl.inc
-
-clang/Basic/AttrLeftSideCanPrintList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
-	${CLANG_TBLGEN} -gen-clang-attr-can-print-left-list \
-	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
-	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
-TGHDRS+=	clang/Basic/AttrLeftSideCanPrintList.inc
-
-clang/Basic/AttrLeftSideMustPrintList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
-	${CLANG_TBLGEN} -gen-clang-attr-must-print-left-list \
-	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
-	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
-TGHDRS+=	clang/Basic/AttrLeftSideMustPrintList.inc
 
 clang/Basic/AttrList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	${CLANG_TBLGEN} -gen-clang-attr-list \
