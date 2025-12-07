@@ -12,7 +12,7 @@ SHLIB_MAJOR=	19
 PRIVATELIB=
 .if ${MACHINE} == "powerpc"
 # Work around "relocation R_PPC_GOT16 out of range" errors
-PICFLAG=        -fPIC
+PICFLAG=	-fPIC
 .endif
 .if ${MACHINE_CPUARCH} == "aarch64"
 # Only required for GCC
@@ -42,6 +42,8 @@ CFLAGS+=	-I${LLVM_SRCS}/lib/Target/${arch}
 .endfor
 
 CFLAGS+=	-I${LLVM_SRCS}/lib/ObjCopy
+
+CFLAGS.SipHash.cpp+=	-I${LLVM_BASE}/third-party/siphash/include
 
 TARGET_ARCH?=	${MACHINE_ARCH}
 
@@ -2081,6 +2083,12 @@ llvm/IR/Intrinsics${arch:H}.h: ${LLVM_SRCS}/include/llvm/IR/Intrinsics.td
 TGHDRS+=	llvm/IR/Intrinsics${arch:H}.h
 .endfor
 
+llvm/IR/RuntimeLibcalls.inc: ${LLVM_SRCS}/include/llvm/IR/RuntimeLibcalls.td
+	${LLVM_TBLGEN} -gen-runtime-libcalls \
+	    -I ${LLVM_SRCS}/include -d ${.TARGET}.d -o ${.TARGET} \
+	    ${LLVM_SRCS}/include/llvm/IR/RuntimeLibcalls.td
+TGHDRS+=	llvm/IR/RuntimeLibcalls.inc
+
 .for arch in AArch64/arm ARM/arm RISCV/riscv
 llvm/TargetParser/${arch:H}TargetParserDef.inc: ${LLVM_SRCS}/lib/Target/${arch:H}/${arch:H}.td
 	${LLVM_TBLGEN} -gen-${arch:T}-target-def \
@@ -2149,6 +2157,7 @@ beforebuild:
 	PreLegalizeGICombiner/-gen-global-isel-combiner,-combiners=${arch:H}PreLegalizerCombiner \
 	RegisterBank/-gen-register-bank \
 	RegisterInfo/-gen-register-info \
+	SDNodeInfo/-gen-sd-node-info \
 	SearchableTables/-gen-searchable-tables \
 	SubtargetInfo/-gen-subtarget \
 	SystemOperands/-gen-searchable-tables \
@@ -2183,6 +2192,7 @@ TGHDRS+=	AArch64GenPostLegalizeGILowering.inc
 TGHDRS+=	AArch64GenPreLegalizeGICombiner.inc
 TGHDRS+=	AArch64GenRegisterBank.inc
 TGHDRS+=	AArch64GenRegisterInfo.inc
+TGHDRS+=	AArch64GenSDNodeInfo.inc
 TGHDRS+=	AArch64GenSubtargetInfo.inc
 TGHDRS+=	AArch64GenSystemOperands.inc
 .endif # MK_LLVM_TARGET_AARCH64
@@ -2264,6 +2274,7 @@ TGHDRS+=	RISCVGenPreLegalizeGICombiner.inc
 TGHDRS+=	RISCVGenRegisterBank.inc
 TGHDRS+=	RISCVGenRegisterInfo.inc
 TGHDRS+=	RISCVGenSearchableTables.inc
+TGHDRS+=	RISCVGenSDNodeInfo.inc
 TGHDRS+=	RISCVGenSubtargetInfo.inc
 TGHDRS+=	RISCVGenSystemOperands.inc
 .endif # MK_LLVM_TARGET_RISCV
