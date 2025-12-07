@@ -12,7 +12,7 @@ SHLIB_MAJOR=	19
 PRIVATELIB=
 .if ${MACHINE} == "powerpc"
 # Work around "relocation R_PPC_GOT16 out of range" errors
-PICFLAG=        -fPIC
+PICFLAG=	-fPIC
 .endif
 .if ${MACHINE_CPUARCH} == "aarch64"
 # Only required for GCC
@@ -1010,11 +1010,23 @@ clang/Basic/AttrList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
 TGHDRS+=	clang/Basic/AttrList.inc
 
+clang/Basic/AttrParsedAttrList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
+	${CLANG_TBLGEN} -gen-clang-attr-parsed-attr-list \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
+TGHDRS+=	clang/Basic/AttrParsedAttrList.inc
+
 clang/Basic/AttrSubMatchRulesList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
 	${CLANG_TBLGEN} -gen-clang-attr-subject-match-rule-list \
 	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
 	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
 TGHDRS+=	clang/Basic/AttrSubMatchRulesList.inc
+
+clang/Basic/AttributeSpellingList.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
+	${CLANG_TBLGEN} -gen-attribute-spelling-list \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
+TGHDRS+=	clang/Basic/AttributeSpellingList.inc
 
 clang/Basic/Builtins.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
 	${CLANG_TBLGEN} -gen-clang-builtins \
@@ -1022,34 +1034,65 @@ clang/Basic/Builtins.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
 	    ${CLANG_SRCS}/include/clang/Basic/Builtins.td
 TGHDRS+=	clang/Basic/Builtins.inc
 
-clang/Basic/BuiltinsBPF.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
+.for arch in \
+	BPF DirectX Hexagon NVPTX RISCV SPIRVCommon SPIRVCL SPIRVVK X86 X86_64
+clang/Basic/Builtins${arch}.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
 	${CLANG_TBLGEN} -gen-clang-builtins \
 	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
-	    ${CLANG_SRCS}/include/clang/Basic/BuiltinsBPF.td
-TGHDRS+=	clang/Basic/BuiltinsBPF.inc
+	    ${CLANG_SRCS}/include/clang/Basic/Builtins${arch}.td
+TGHDRS+=	clang/Basic/Builtins${arch}.inc
+.endfor
 
-clang/Basic/BuiltinsRISCV.inc: ${CLANG_SRCS}/include/clang/Basic/Builtins.td
-	${CLANG_TBLGEN} -gen-clang-builtins \
+clang/Basic/BuiltinTemplates.inc: ${CLANG_SRCS}/include/clang/Basic/BuiltinTemplates.td
+	${CLANG_TBLGEN} -gen-clang-builtin-templates \
 	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
-	    ${CLANG_SRCS}/include/clang/Basic/BuiltinsRISCV.td
-TGHDRS+=	clang/Basic/BuiltinsRISCV.inc
+	    ${CLANG_SRCS}/include/clang/Basic/BuiltinTemplates.td
+TGHDRS+=	clang/Basic/BuiltinTemplates.inc
 
-clang/Basic/RegularKeywordAttrInfo.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
-	${CLANG_TBLGEN} -gen-clang-regular-keyword-attr-info \
+clang/Basic/CXX11AttributeInfo.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
+	${CLANG_TBLGEN} -gen-cxx11-attribute-info \
 	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
 	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
-TGHDRS+=	clang/Basic/RegularKeywordAttrInfo.inc
+TGHDRS+=	clang/Basic/CXX11AttributeInfo.inc
 
 .for hdr in \
 	AST Analysis Comment Common CrossTU Driver Frontend InstallAPI Lex \
 	Parse Refactoring Sema Serialization
+clang/Basic/Diagnostic${hdr}CompatIDs.inc: \
+	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+	${CLANG_TBLGEN} -gen-clang-diags-compat-ids -clang-component=${hdr} \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+TGHDRS+=	clang/Basic/Diagnostic${hdr}CompatIDs.inc
+
+clang/Basic/Diagnostic${hdr}Enums.inc: \
+	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+	${CLANG_TBLGEN} -gen-clang-diags-enums -clang-component=${hdr} \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+TGHDRS+=	clang/Basic/Diagnostic${hdr}Enums.inc
+
 clang/Basic/Diagnostic${hdr}Kinds.inc: \
 	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
 	${CLANG_TBLGEN} -gen-clang-diags-defs -clang-component=${hdr} \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
 TGHDRS+=	clang/Basic/Diagnostic${hdr}Kinds.inc
+
+clang/Basic/Diagnostic${hdr}Interface.inc: \
+	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+	${CLANG_TBLGEN} -gen-clang-diags-iface -clang-component=${hdr} \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+TGHDRS+=	clang/Basic/Diagnostic${hdr}Interface.inc
 .endfor
+
+clang/Basic/DiagnosticAllCompatIDs.inc: \
+	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+	${CLANG_TBLGEN} -gen-clang-diags-compat-ids \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
+TGHDRS+=	clang/Basic/DiagnosticAllCompatIDs.inc
 
 clang/Basic/DiagnosticGroups.inc: \
 	${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
@@ -1064,6 +1107,12 @@ clang/Basic/DiagnosticIndexName.inc: \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/Diagnostic.td
 TGHDRS+=	clang/Basic/DiagnosticIndexName.inc
+
+clang/Basic/RegularKeywordAttrInfo.inc: ${CLANG_SRCS}/include/clang/Basic/Attr.td
+	${CLANG_TBLGEN} -gen-clang-regular-keyword-attr-info \
+	    -I ${CLANG_SRCS}/include -d ${.TARGET:C/$/.d/} -o ${.TARGET} \
+	    ${CLANG_SRCS}/include/clang/Basic/Attr.td
+TGHDRS+=	clang/Basic/RegularKeywordAttrInfo.inc
 
 clang/Basic/arm_cde_builtin_aliases.inc: \
 	${CLANG_SRCS}/include/clang/Basic/arm_cde.td
@@ -1096,6 +1145,12 @@ clang/Basic/arm_fp16.inc: ${CLANG_SRCS}/include/clang/Basic/arm_fp16.td
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_fp16.td
 TGHDRS+=	clang/Basic/arm_fp16.inc
+
+clang/Basic/arm_immcheck_types.inc: ${CLANG_SRCS}/include/clang/Basic/arm_mve.td
+	${CLANG_TBLGEN} -gen-arm-immcheck-types \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
+TGHDRS+=	clang/Basic/arm_immcheck_types.inc
 
 clang/Basic/arm_mve_builtin_aliases.inc: \
 	${CLANG_SRCS}/include/clang/Basic/arm_mve.td
@@ -1196,6 +1251,27 @@ clang/Basic/arm_sve_typeflags.inc: \
 	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
 	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/arm_sve.td
 TGHDRS+=	clang/Basic/arm_sve_typeflags.inc
+
+clang/Basic/riscv_andes_vector_builtin_cg.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_andes_vector.td
+	${CLANG_TBLGEN} -gen-riscv-andes-vector-builtin-codegen \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_andes_vector.td
+TGHDRS+=	clang/Basic/riscv_andes_vector_builtin_cg.inc
+
+clang/Basic/riscv_andes_vector_builtin_sema.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_andes_vector.td
+	${CLANG_TBLGEN} -gen-riscv-andes-vector-builtin-sema \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_andes_vector.td
+TGHDRS+=	clang/Basic/riscv_andes_vector_builtin_sema.inc
+
+clang/Basic/riscv_andes_vector_builtins.inc: \
+	${CLANG_SRCS}/include/clang/Basic/riscv_andes_vector.td
+	${CLANG_TBLGEN} -gen-riscv-andes-vector-builtins \
+	    -I ${CLANG_SRCS}/include/clang/Basic -d ${.TARGET:C/$/.d/} \
+	    -o ${.TARGET} ${CLANG_SRCS}/include/clang/Basic/riscv_andes_vector.td
+TGHDRS+=	clang/Basic/riscv_andes_vector_builtins.inc
 
 clang/Basic/riscv_sifive_vector_builtin_cg.inc: \
 	${CLANG_SRCS}/include/clang/Basic/riscv_sifive_vector.td
