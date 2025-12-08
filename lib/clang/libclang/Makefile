@@ -862,6 +862,7 @@ SRCS_MIN+=	Tooling/DependencyScanning/DependencyScanningFilesystem.cpp
 SRCS_MIN+=	Tooling/DependencyScanning/DependencyScanningService.cpp
 SRCS_MIN+=	Tooling/DependencyScanning/DependencyScanningTool.cpp
 SRCS_MIN+=	Tooling/DependencyScanning/DependencyScanningWorker.cpp
+SRCS_MIN+=	Tooling/DependencyScanning/InProcessModuleCache.cpp
 SRCS_MIN+=	Tooling/DependencyScanning/ModuleDepCollector.cpp
 SRCS_MIN+=	Tooling/ExpandResponseFilesCompilationDatabase.cpp
 SRCS_MIN+=	Tooling/FileMatchTrie.cpp
