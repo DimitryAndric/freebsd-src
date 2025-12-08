@@ -68,6 +68,7 @@ SRCDIR=		llvm/lib
 # SRCS_XDL:	required for MK_CLANG_EXTRAS, MK_LLD and MK_LLDB
 # SRCS_XDW:	required for MK_CLANG_EXTRAS and MK_LLDB in world stage
 # SRCS_COV:	required for MK_LLVM_COV
+# SRCS_COL:	required for MK_LLVM_COV and MK_LLD
 
 SRCS_MIN+=	Analysis/AliasAnalysis.cpp
 SRCS_MIN+=	Analysis/AliasAnalysisEvaluator.cpp
@@ -1223,7 +1224,7 @@ SRCS_MIN+=	Support/BLAKE3/blake3_portable.c
 SRCS_MIN+=	Support/BLAKE3/blake3_sse2_x86-64_unix.S
 SRCS_MIN+=	Support/BLAKE3/blake3_sse41_x86-64_unix.S
 .endif
-SRCS_COV+=	Support/BalancedPartitioning.cpp
+SRCS_COL+=	Support/BalancedPartitioning.cpp
 SRCS_MIN+=	Support/BinaryStreamError.cpp
 SRCS_MIN+=	Support/BinaryStreamReader.cpp
 SRCS_MIN+=	Support/BinaryStreamRef.cpp
@@ -2205,6 +2206,10 @@ SRCS_ALL+=	${SRCS_XDW}
 .endif
 .if ${MK_LLVM_COV} != "no"
 SRCS_ALL+=	${SRCS_COV}
+.endif
+.if ${MK_LLVM_COV} != "no" || ${MK_LLD} != "no" || \
+    (defined(TOOLS_PREFIX) && ${MK_LLD_BOOTSTRAP} != "no")
+SRCS_ALL+=	${SRCS_COL}
 .endif
 SRCS+=		${GENSRCS}
 SRCS+=		${SRCS_ALL:O}
