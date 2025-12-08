@@ -76,6 +76,7 @@ SRCS+=		API/SBPlatform.cpp
 SRCS+=		API/SBProcess.cpp
 SRCS+=		API/SBProcessInfo.cpp
 SRCS+=		API/SBProcessInfoList.cpp
+SRCS+=		API/SBProgress.cpp
 SRCS+=		API/SBQueue.cpp
 SRCS+=		API/SBQueueItem.cpp
 SRCS+=		API/SBReproducer.cpp
