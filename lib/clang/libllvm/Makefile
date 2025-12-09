@@ -8,7 +8,7 @@ INTERNALLIB=
 .else
 PACKAGE=	clang
 SHLIB_CXX=	llvm
-SHLIB_MAJOR=	19
+SHLIB_MAJOR=	21
 PRIVATELIB=
 .if ${MACHINE} == "powerpc"
 # Work around "relocation R_PPC_GOT16 out of range" errors

@@ -4,7 +4,7 @@
 .PATH:		${CLANG_SRCS}/lib/Headers
 
 INCSGROUPS+=	INCS
-INCSDIR=	${LIBDIR}/clang/19/include
+INCSDIR=	${LIBDIR}/clang/21/include
 INCS+=		__clang_cuda_builtin_vars.h
 INCS+=		__clang_cuda_cmath.h
 INCS+=		__clang_cuda_complex_builtins.h

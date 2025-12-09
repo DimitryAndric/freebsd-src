@@ -8,7 +8,7 @@ INTERNALLIB=
 .else
 PACKAGE=	lldb
 SHLIB_CXX=	lldb
-SHLIB_MAJOR=	19
+SHLIB_MAJOR=	21
 PRIVATELIB=
 .if ${MACHINE_CPUARCH} == "aarch64"
 # Only required for GCC
